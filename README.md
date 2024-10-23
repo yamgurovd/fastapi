@@ -74,7 +74,7 @@ sudo usermod -aG docker $USER
 
 ### Запуск проекта в Docker
 1. Перейти в директорию проекта на локальном компьютере через терминал пример:
-![Пример](![img.png](img.png))
+   <img alt="Пример" src="![img.png](img.png)"/>
 2. Собрать образ контейнера
 ```angular2html
 docker build -t fastapi .
