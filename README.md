@@ -25,6 +25,10 @@ pip install fastapi[all]
 ```angular2html
 python -m pip freeze > requirements.txt
 ```
+4. Создать файл с расширением .env заполнив в корне проекта
+```angular2html
+BASE_URL = "http://127.0.0.1:8000/"
+```
 ### 2 Команды для запуска проекта на локали
 
 1. Запуск проекта на локали
