@@ -11,8 +11,11 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-2. Установить библиотеку FastAPI
-
+2. Установить библиотеки из requirements.txt
+```angular2html
+pip install -r requirements.txt
+```
+2. Альтеративно уставить библиотеку fastapi
 ```angular2html
 pip install fastapi[all]
 ```
