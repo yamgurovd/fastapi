@@ -1,6 +1,6 @@
 # fastapi
 
-Ознакомление с FAST api
+## Создание автотестов API с помощью fastapi + pytest + requests + allure
 
 ### 1 Настройка проекта
 
