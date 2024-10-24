@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from src.fake_users import fake_users
 
 app = FastAPI(
-    title="test app"
+    title="Users app"
 )
 
 
