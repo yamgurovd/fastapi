@@ -1,8 +1,12 @@
-# Автотесты API создание пользователя
 
-## Создание автотестов API с помощью fastapi + pytest + requests + allure
+# Автотесты API на стеке FastApi + Pytest + requests + allure
 
-### 1 Настройка проекта
+## Краткое описание 
+Создание и заполнение нового пользователя выполнятся с помощью фреймфорка FastApi
+Проверка Api тестов выполняется с помощью Pytest + requests + allure
+Доступ к Swagger документации смотри 4 пукнт
+
+## 1 Настройка проекта
 
 1. Создать и активировать виртуальное окружение
 
@@ -29,16 +33,19 @@ python -m pip freeze > requirements.txt
 ```angular2html
 BASE_URL = "http://127.0.0.1:8000/"
 ```
-### 2 Команды для запуска проекта на локали
+## 2 Команды для запуска проекта на локальном компьютере
 
-1. Запуск проекта на локали
+1. Запуск проекта на локальном компьютрере
    Remark: флаг --reload необязателен
 
 ```angular2html
 uvicorn main:app --reload
 ```
-
-### 3 Установка и настройка docker в локальнм компьютере для линукс - https://docs.docker.com/engine/install/ubuntu/
+2. Запуск API тестов 
+```angular2html
+python -m pytest -s -v
+```
+## 3 Установка и настройка docker в локальном компьютере для линукса - https://docs.docker.com/engine/install/ubuntu/
 
 1. Set up Docker's apt repository.
 
@@ -79,9 +86,9 @@ sudo usermod -aG docker $USER
 5. /home/d/.docker - В директории на локальном компьютере удалить папку
 6. Выполнить reboot
 
-### Запуск проекта в Docker
+## 3.1 Запуск проекта в Docker
 1. Перейти в директорию проекта на локальном компьютере через терминал пример:
-   <img alt="Пример" src="![img.png](img.png)"/>
+   <img alt="Пример" height="100" src="![img.png](img.png)" title="Пример" width="100"/>
 2. Собрать образ контейнера
 ```angular2html
 docker build -t fastapi .
@@ -100,7 +107,7 @@ docker rm <id_container>
 docker rmi <id_images>
 ```
 
-### 3 Дополнительная информация по проекту
+## 4 Дополнительная информация по проекту
 
 1. Доступ к swagger документации - http://127.0.0.1:8000/docs#/
 

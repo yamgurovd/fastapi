@@ -6,16 +6,24 @@ app = FastAPI(
 )
 
 
-@app.get("/")
+@app.get("/",
+         status_code=200,
+         name="Приветствие с пользователем",
+         description="name: Имя пользователя")
 def hello_person(name: str):
-    """
-    :param name: Имя пользователя
-    :return: Приветствие с пользователем
-    """
     return f"Привет {name}"
 
 
-@app.post("/users/{user_id}")
+@app.post("/users/{user_id}",
+          status_code=201,
+          name="Создание нового пользователя",
+          description="user_id: Id пользователя \n"
+                      "first_name: Имя пользователя \n"
+                      "last_name: Фамилия пользователя \n"
+                      "patronymic: Отчество пользователя \n"
+                      "age: возраст \n"
+                      "position: Должность \n"
+                      "company: Название компании")
 def add_new_user(user_id: int,
                  first_name: str,
                  last_name: str,
@@ -23,16 +31,7 @@ def add_new_user(user_id: int,
                  age: int,
                  position: str,
                  company: str):
-    """
-    :param user_id: Id пользователя
-    :param first_name: Имя пользователя
-    :param last_name: Фамилия пользователя
-    :param patronymic: Отчество пользователя
-    :param age: возраст
-    :param position: Должность
-    :param company: Название компании
-    :return: Создание нового пользователя
-    """
+
     new_user = {"id": user_id, "first_name": first_name, "last_name": last_name, "patronymic": patronymic,
                 "age": age, "position": position, "company": company}
 
@@ -41,7 +40,16 @@ def add_new_user(user_id: int,
     return new_user
 
 
-@app.patch("/users/{user_id}")
+@app.patch("/users/{user_id}",
+           status_code=200,
+           name="Изменение данных пользователя",
+           description="user_id: id пользователя, \n"
+                       "first_name: Имя \n"
+                       "last_name: Фамилия \n"
+                       "patronymic: Отчество \n"
+                       "age: Возраст \n"
+                       "position: Должность \n"
+                       "company: Название организации")
 def update_user_info(user_id: int,
                      first_name: str,
                      last_name: str,
@@ -49,16 +57,6 @@ def update_user_info(user_id: int,
                      age: int,
                      position: str,
                      company: str):
-    """
-    :param user_id: id пользователя
-    :param first_name: Имя
-    :param last_name: Фамилия
-    :param patronymic: Отчество
-    :param age: Возраст
-    :param position: Должность
-    :param company: Название организации
-    :return: Изменение данных пользователя
-    """
     for user in fake_users:
         # print(user)
         if user["id"] == user_id:
@@ -72,32 +70,29 @@ def update_user_info(user_id: int,
             return user
 
 
-@app.get("/users")
+@app.get("/users",
+         status_code=200,
+         name="Список всех пользователей")
 def get_users():
-    """
-    :return: Список всех пользователей
-    """
     return fake_users
 
 
-@app.get("/users/{user_id}")
+@app.get("/users/{user_id}",
+         status_code=200,
+         name="Информация о пользователе",
+         description="user_id: id пользователя")
 def user_info(user_id: int):
-    """
-    :param user_id: id пользователя
-    :return: Информацию о пользователе
-    """
     for user in fake_users:
         # print(user)
         if user["id"] == user_id:
             return user
 
 
-@app.delete("/users/{user_id}")
+@app.delete("/users/{user_id}",
+            status_code=204,
+            name="Удаление записи пользователя",
+            description="user_id: id пользователя")
 def delete_user_id(user_id: int):
-    """
-        :param user_id: id пользователя
-        :return: Удаление записи пользователя
-        """
     for user in fake_users:
         if user["id"] == user_id:
             fake_users.remove(user)
