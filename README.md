@@ -1,4 +1,4 @@
-# fastapi
+# Автотесты API создание пользователя
 
 ## Создание автотестов API с помощью fastapi + pytest + requests + allure
 
