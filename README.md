@@ -48,3 +48,76 @@ python main.py
 ```
 
 #### Remark: Данный вид запуска применяется при разворачивании проекта на сервере
+
+## 3 Установка PostgreSQL
+
+Инструкция взята -  https://firstvds.ru/technology/ustanovka-postgresql-na-ubuntu
+
+### в консоли:
+
+- 1
+
+```shell
+sudo apt update
+```
+
+- 2
+
+```shell
+sudo apt install postgresql
+```
+
+- 3
+
+```shell
+sudo systemctl start postgresql.service
+```
+
+#### Remark  если установлен постгрес начать с этого шага
+
+- 4
+
+```shell
+sudo -i -u postgres
+```
+
+- 5
+
+```sql
+psql
+```
+
+- 6
+
+```sql
+create database testdb;
+```
+
+#### Remark  не забудь кавычки
+
+### Полезные команды для SQL
+
+- в psql команды надо заканчивать символом ;
+- \l вводишь в psql, это список бд
+- при успешном создании бд будет ответ CREATE DATABASE
+- q - для выхода после команды
+
+### Пример установки PostgreSQL
+
+!["PostgreSQL"](/course_helpers/2%20Осваиваем%20FastAPI/BD5.png)
+
+## Взаимодействие БД с помощью sqlalchemy и alembic
+
+### Установка
+
+1. Установка библиотек для запросов к БД
+
+```shell
+pip install sqlalchemy alembic
+```
+
+2Установка библиотек для запросов к БД
+
+```shell
+pip install sqlalchemy alembic
+```
