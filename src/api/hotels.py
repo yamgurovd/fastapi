@@ -20,7 +20,7 @@ async def get_hotels(
         query = select(HotelsOrm)
         result = await session.execute(query)
         hotels = result.scalars().all()
-        # print(type(hotels), hotels)
+        print(type(hotels), hotels)
         return hotels
 
         # if pagination.page and pagination.per_page:
@@ -47,7 +47,7 @@ async def create_hotel(hotel_data: Hotel = Body(openapi_examples={
 ):
     async with async_session_maker() as session:
         add_hotel_stmt = insert(HotelsOrm).values(**hotel_data.model_dump())
-        # print(add_hotel_stmt.compile(engine, compile_kwargs={"literal_binds": True}))
+        print(add_hotel_stmt.compile(engine, compile_kwargs={"literal_binds": True}))
         await session.execute(add_hotel_stmt)
         await session.commit()
     return {"status": "OK"}
