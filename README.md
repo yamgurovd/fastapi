@@ -104,11 +104,13 @@ create database testdb;
 
 ### Пример установки PostgreSQL
 
-!["PostgreSQL"](/course_helpers/2%20Осваиваем%20FastAPI/BD5.png)
+!["PostgreSQL"](/course_helpers/3%20База%20данных%20и%20паттерны/BD5.png)
+
 
 ## Взаимодействие БД с помощью sqlalchemy и alembic
 
 ### Установка
+
 
 1. Установка библиотек для запросов к БД
 
@@ -116,8 +118,31 @@ create database testdb;
 pip install sqlalchemy alembic
 ```
 
+
 2Установка библиотек для запросов к БД
 
 ```shell
 pip install sqlalchemy alembic
 ```
+
+### Миграции
+
+1. Инициализация и настройка директорий для миграций
+```shell
+alembic init src/migrations
+```
+
+2. Подготовка миграции для создания таблиц и выполнение обновлений
+
+```shell
+alembic revision --autogenerate -m "initial_migration"
+```
+
+3. Создание таблицы в БД
+
+```shell
+alembic upgrade head
+```
+
+### Пример выполнения миграции
+!["PostgreSQL"](/course_helpers/3%20База%20данных%20и%20паттерны/alembic_migrations_example1.png)
