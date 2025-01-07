@@ -4,6 +4,8 @@ import uvicorn
 import sys
 from pathlib import Path
 
+# from src.database import *
+
 sys.path.append(str(Path(__file__).parent.parent))
 app = FastAPI()
 
