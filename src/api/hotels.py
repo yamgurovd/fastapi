@@ -22,9 +22,9 @@ async def get_hotels(
         query = select(HotelsOrm)
 
         if location:
-            query = query.filter(func.lower(HotelsOrm.location).like(f"%{location.strip().lower()}%"))
+            query = query.filter(func.lower(HotelsOrm.location).contains(location.strip().lower()))
         if title:
-            query = query.filter(func.lower(HotelsOrm.title).like(f"%{title.strip().lower()}%"))
+            query = query.filter(func.lower(HotelsOrm.title).contains(title.strip().lower()))
         query = (
             query
             .limit(per_page)
@@ -36,9 +36,6 @@ async def get_hotels(
         print(type(hotels), hotels)
 
         return hotels
-
-        # if pagination.page and pagination.per_page:
-        #     return hotels_[pagination.per_page * (pagination.page - 1):][:pagination.per_page]
 
 
 @router.post("")
