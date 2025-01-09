@@ -61,6 +61,7 @@ async def edit_hotel(hotel_id: int, hotel_data: Hotel):
     return {"status": "OK"}
 
 
+#  Смотри ниже
 @router.patch(
     "/{hotel_id}",
     summary="Частичное обновление данных об отеле",
