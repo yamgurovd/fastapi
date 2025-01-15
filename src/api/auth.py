@@ -41,14 +41,18 @@ async def register_user(
 
 
 @router.post("/login")
-async def login_user(
-        data: UserRequestAdd,
-):
+async def login_user(data: UserRequestAdd):
+    print(f"Attempting login for email: {data.email}")
     async with async_session_maker() as session:
         user = await UsersRepository(session).get_user_with_hashed_password(email=data.email)
-        if not user:
+
+        if user is None:
+            print("User not found.")
             raise HTTPException(status_code=401, detail="Пользователь с таким email не зарегистрирован")
+
         if not verify_password(data.password, user.hashed_password):
+            print("Password verification failed.")
             raise HTTPException(status_code=401, detail="Пароль неверный")
+
         access_token = create_access_token({"user_id": user.id})
         return {"access_token": access_token}
