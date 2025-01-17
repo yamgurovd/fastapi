@@ -57,3 +57,5 @@ if __name__ == "__main__":
 
 # Запуск
 # uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+# http://localhost:8000/static/login/auth.html - страница логирования
+#
