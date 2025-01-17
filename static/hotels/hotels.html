@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление Отелями</title>
+    <link rel="stylesheet" href="hotels.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Управление Отелями</h1>
+
+        <div class="form-container">
+            <h2>Добавить Отель</h2>
+            <form id="hotel-form">
+                <input type="text" id="hotel-title" placeholder="Название отеля" required>
+                <input type="text" id="hotel-location" placeholder="Локация" required>
+                <button type="submit">Добавить</button>
+            </form>
+        </div>
+
+        <div class="hotel-list">
+            <h2>Список Отелей</h2>
+            <ul id="hotels"></ul>
+        </div>
+
+        <div id="message"></div>
+    </div>
+
+    <script src="hotels.js"></script>
+</body>
+</html>
