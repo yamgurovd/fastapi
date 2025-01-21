@@ -10,25 +10,26 @@
 <div class="container">
     <h1>Авторизация и Аутентификация</h1>
 
-    <div class="form-container">
+    <section class="form-container">
         <h2>Регистрация</h2>
-        <form id="register-form">
-            <input type="email" id="register-email" placeholder="Email" required>
-            <input type="password" id="register-password" placeholder="Пароль" required>
+        <form id="register-form" autocomplete="off">
+            <input type="email" id="register-email" placeholder="Email" required autocomplete="email">
+            <input type="password" id="register-password" placeholder="Пароль" required autocomplete="new-password">
             <button type="submit">Зарегистрироваться</button>
         </form>
-    </div>
+    </section>
 
-    <div class="form-container">
+    <section class="form-container">
         <h2>Вход</h2>
-        <form id="login-form">
-            <input type="email" id="login-email" placeholder="Email" required>
-            <input type="password" id="login-password" placeholder="Пароль" required>
+        <form id="login-form" autocomplete="off">
+            <input type="email" id="login-email" placeholder="Email" required autocomplete="email">
+            <input type="password" id="login-password" placeholder="Пароль" required autocomplete="current-password">
             <button type="submit">Войти</button>
         </form>
-    </div>
+    </section>
 
     <div id="message"></div>
+    <button id="logout-button" style="display: none;">Выйти</button> <!-- Кнопка выхода -->
 </div>
 
 <script src="auth.js"></script>

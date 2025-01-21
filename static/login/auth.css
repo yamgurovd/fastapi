@@ -1,4 +1,3 @@
-/* styles.css */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -34,16 +33,25 @@ input {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
 }
 
 button:hover {
-    background-color: #218838;
+   background-color: #218838; /* Цвет при наведении */
 }
 
 #message {
-    margin-top: 20px;
+   margin-top: 20px;
+}
+
+#logout-button {
+   margin-top: 20px;
+   padding: 10px;
+   background-color: #dc3545; /* Красный цвет для кнопки выхода */
+   color: white;
+   border: none;
+   border-radius: 5px;
+}
+
+#logout-button:hover {
+   background-color: #c82333; /* Темнее при наведении */
 }
