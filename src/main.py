@@ -35,9 +35,11 @@ app = FastAPI()
 # Include routers for different modules
 from api.auth import router as router_auth  # Adjusted import path
 from api.hotels import router as router_hotels  # Adjusted import path
+from src.api.rooms import router as router_rooms
 
 app.include_router(router_auth)
 app.include_router(router_hotels)
+app.include_router(router_rooms)
 
 # Configure CORS middleware
 app.add_middleware(
