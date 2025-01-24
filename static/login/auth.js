@@ -1,23 +1,24 @@
+// Обработка отправки формы регистрации
 document.getElementById('register-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Предотвращаем стандартное поведение формы
 
-    const email = document.getElementById('register-email').value;
-    const password = document.getElementById('register-password').value;
+    const email = document.getElementById('register-email').value; // Получаем email
+    const password = document.getElementById('register-password').value; // Получаем пароль
 
     const response = await fetch('/auth/register', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({email, password})
+        body: JSON.stringify({email, password}) // Преобразуем данные в JSON
     });
 
-    const message = document.getElementById('message');
+    const message = document.getElementById('message'); // Получаем элемент для сообщений
 
     if (response.ok) {
         message.textContent = 'Регистрация прошла успешно!';
         message.style.color = 'green';
-        document.getElementById('register-form').reset();
+        document.getElementById('register-form').reset(); // Очищаем форму
     } else {
         const error = await response.json();
         message.textContent = error.detail || 'Ошибка регистрации.';
@@ -25,21 +26,22 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     }
 });
 
+// Обработка отправки формы входа
 document.getElementById('login-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Предотвращаем стандартное поведение формы
 
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+    const email = document.getElementById('login-email').value; // Получаем email
+    const password = document.getElementById('login-password').value; // Получаем пароль
 
     const response = await fetch('/auth/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({email, password})
+        body: JSON.stringify({ email, password }) // Преобразуем данные в JSON
     });
 
-    const message = document.getElementById('message');
+    const message = document.getElementById('message'); // Получаем элемент для сообщений
 
     if (response.ok) {
         const data = await response.json();
@@ -50,13 +52,15 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
         localStorage.setItem('access_token', data.access_token);
 
         // Перенаправление на страницу управления отелями
-        window.location.href = 'http://localhost:8000/static/hotels/hotels.html'; // Замените '/hotels' на нужный путь
+        window.location.href = 'http://localhost:8000/static/hotels/hotels.html'; // Замените на нужный путь
     } else {
         const error = await response.json();
         message.textContent = error.detail || 'Ошибка входа.';
         message.style.color = 'red';
     }
 });
+
+
 
 // Обработчик для кнопки "Выйти"
 document.getElementById('logout-button').addEventListener('click', async () => {
@@ -74,7 +78,7 @@ document.getElementById('logout-button').addEventListener('click', async () => {
         document.getElementById('logout-button').style.display = 'none';
 
         // Можно перенаправить на страницу входа или главную
-        window.location.href = '/';
+        window.location.href = '/'; // Замените на нужный путь
     } else {
         const error = await response.json();
         document.getElementById('message').textContent = error.detail || 'Ошибка выхода.';

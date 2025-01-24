@@ -3,30 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Управление Отелями</title>
+    <title>CRUD Отели</title>
     <link rel="stylesheet" href="hotels.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Управление Отелями</h1>
+<div class="container">
+    <h1>Управление отелями</h1>
 
-        <div class="form-container">
-            <h2>Добавить Отель</h2>
-            <form id="hotel-form">
-                <input type="text" id="hotel-title" placeholder="Название отеля" required>
-                <input type="text" id="hotel-location" placeholder="Локация" required>
-                <button type="submit">Добавить</button>
-            </form>
-        </div>
-
-        <div class="hotel-list">
-            <h2>Список Отелей</h2>
-            <ul id="hotels"></ul>
-        </div>
-
-        <div id="message"></div>
+    <!-- Поле поиска -->
+    <div id="search-container">
+        <form id="search-form" onsubmit="return false;">
+            <input type="text" id="search-input" placeholder="Поиск по названию или локации..."/>
+            <button type="button" id="search-button">Поиск</button>
+        </form>
     </div>
 
-    <script src="hotels.js"></script>
+    <div id="hotel-form">
+        <h2>Добавить новый отель</h2>
+        <input type="hidden" id="hotel-id"/>
+        <input type="text" id="hotel-title" placeholder="Название отеля" required/>
+        <input type="text" id="hotel-location" placeholder="Локация" required/>
+        <button id="save-hotel">Сохранить</button>
+    </div>
+
+    <h2>Список отелей</h2>
+
+    <table id="hotel-table">
+        <thead>
+        <tr>
+            <th>Название</th>
+            <th>Локация</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody id="hotel-list">
+        <!-- Данные отелей будут добавлены сюда -->
+        </tbody>
+    </table>
+
+</div>
+
+<script src="hotels.js"></script>
 </body>
 </html>

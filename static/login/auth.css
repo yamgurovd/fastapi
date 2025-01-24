@@ -9,7 +9,7 @@ body {
     max-width: 600px;
     margin: auto;
     padding: 20px;
-    background: white;
+    background: burlywood; /* Цвет фона контейнера */
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -33,6 +33,10 @@ input {
 button {
     width: 100%;
     padding: 10px;
+    background-color: #28a745; /* Зеленый цвет для кнопки */
+    color: white;
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Скругление углов кнопки */
 }
 
 button:hover {
@@ -41,6 +45,7 @@ button:hover {
 
 #message {
    margin-top: 20px;
+   text-align: center; /* Центрируем текст сообщения */
 }
 
 #logout-button {
@@ -49,7 +54,7 @@ button:hover {
    background-color: #dc3545; /* Красный цвет для кнопки выхода */
    color: white;
    border: none;
-   border-radius: 5px;
+   border-radius: 5px; /* Скругление углов кнопки */
 }
 
 #logout-button:hover {

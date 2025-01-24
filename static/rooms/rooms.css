@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: burlywood; /* Цвет фона контейнера */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #333;
+}
+
+#room-form {
+    margin-bottom: 20px;
+}
+
+input, textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745; /* Зеленый цвет для кнопки */
+    color: white;
+    border: none; /* Убираем границу */
+    border-radius: 5px; /* Скругление углов кнопки */
+}
+
+button:hover {
+   background-color: #218838; /* Цвет при наведении */
+}
+
+/* Стили для таблицы */
+table {
+    width: 100%; /* Занимает всю ширину контейнера */
+    border-collapse: collapse; /* Убираем двойные границы */
+}
+
+th, td {
+    padding: 12px; /* Отступы внутри ячеек */
+    text-align: center; /* Выравнивание текста в ячейках по умолчанию */
+}
+
+th {
+    background-color: #0056b3; /* Темный синий цвет для заголовков таблицы */
+    color: white; /* Цвет текста заголовков */
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9; /* Светлый цвет для четных строк */
+}
+
+tr:hover {
+    background-color: #e9ecef; /* Более яркий цвет при наведении */
+}
+
+/* Стили для кнопок в таблице */
+td button {
+   margin-left: 5px; /* Отступ между кнопками в ячейках */
+   background-color: #007bff; /* Основной синий цвет для кнопок */
+   color: white; /* Цвет текста кнопок */
+   border: none; /* Убираем границу кнопок */
+   border-radius: 5px; /* Скругление углов кнопок */
+   padding: 8px; /* Отступы внутри кнопок */
+}
+
+td button:hover {
+   background-color: #0056b3; /* Темный цвет при наведении на кнопку */
+}
