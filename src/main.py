@@ -37,10 +37,12 @@ from api.auth import router as router_auth  # Adjusted import path
 from api.hotels import router as router_hotels  # Adjusted import path
 from src.api.rooms import router as router_rooms
 from src.api.bookings import router as router_bookings
+from src.api.facilities import router as router_facilities
 
 app.include_router(router_auth)
 app.include_router(router_hotels)
 app.include_router(router_rooms)
+app.include_router(router_facilities)
 app.include_router(router_bookings)
 
 # Configure CORS middleware
