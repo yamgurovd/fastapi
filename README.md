@@ -106,18 +106,15 @@ create database testdb;
 
 !["PostgreSQL"](/course_helpers/3%20База%20данных%20и%20паттерны/BD5.png)
 
-
 ## Взаимодействие БД с помощью sqlalchemy и alembic
 
 ### Установка
-
 
 1. Установка библиотек для запросов к БД
 
 ```shell
 pip install sqlalchemy alembic
 ```
-
 
 2Установка библиотек для запросов к БД
 
@@ -128,6 +125,7 @@ pip install sqlalchemy alembic
 ### Миграции
 
 1. Инициализация и настройка директорий для миграций
+
 ```shell
 alembic init src/migrations
 ```
@@ -145,4 +143,89 @@ alembic upgrade head
 ```
 
 ### Пример выполнения миграции
+
 !["PostgreSQL"](/course_helpers/3%20База%20данных%20и%20паттерны/alembic_migrations_example1.png)
+
+## Установка Redis
+
+1. Обновите пакеты:
+
+```shell
+sudo apt update
+sudo apt upgrade
+```
+2. Установите Redis:
+```shell
+sudo apt install redis-server
+```
+3. Откройте конфигурационный файл:
+```shell
+sudo nano /etc/redis/redis.conf
+```
+4. Найдите секцию GENERAL (используйте поиск Ctrl+W и введите GENERAL) - Она выглядит примерно так:
+```text
+################################# GENERAL #####################################
+
+# By default Redis does not run as a daemon. Use 'yes' if you need it.
+daemonize yes
+
+# If you run Redis from upstart or systemd, Redis can interact with your
+# supervision tree. Options:
+#   supervised no
+#   supervised systemd
+#   supervised auto
+# supervised auto
+
+pidfile /var/run/redis/redis-server.pid
+```
+5. Добавьте строку supervised systemd после комментариев, но перед другими параметрами (например, pidfile):
+```text
+################################# GENERAL #####################################
+
+# By default Redis does not run as a daemon. Use 'yes' if you need it.
+# Note that Redis will write a pid file in /var/run/redis.pid when daemonized.
+# When Redis is supervised by upstart or systemd, this parameter has no impact.
+daemonize yes
+
+# If you run Redis from upstart or systemd, Redis can interact with your
+# supervision tree. Options:
+#   supervised no      - no supervision interaction
+#   supervised upstart - signal upstart by putting Redis into SIGSTOP mode
+#                        requires "expect stop" in your upstart job config
+#   supervised systemd - signal systemd by writing READY=1 to $NOTIFY_SOCKET
+#                        on startup, and updating Redis status on a regular
+#                        basis.
+#   supervised auto    - detect upstart or systemd method based on
+#                        UPSTART_JOB or NOTIFY_SOCKET environment variables
+# Note: these supervision methods only signal "process is ready."
+#       They do not enable continuous pings back to your supervisor.
+#
+# The default is "no". To run under upstart/systemd, you can simply uncomment
+# the line below:
+#
+# supervised auto
+supervised systemd ---- ВОТ ЗДЕСЬ НУЖНО ДОБАВИТЬ 
+```
+6. После этого сохраните изменения с помощью комбинации клавиш Ctrl + O. Затем закройте файл сочетанием Ctrl + X.
+7. Перезапустите службу Redis:
+```shell
+sudo systemctl restart redis.service
+```
+### Пример работы черз redis-cli
+```redis
+d@d:~$ redis-cli
+127.0.0.1:6379> set a 14
+OK
+127.0.0.1:6379> keys *
+1) "a"
+127.0.0.1:6379> values *
+(error) ERR unknown command 'values', with args beginning with: '*' 
+127.0.0.1:6379> value a
+(error) ERR unknown command 'value', with args beginning with: 'a' 
+127.0.0.1:6379> get a
+"14"
+127.0.0.1:6379> del a
+(integer) 1
+127.0.0.1:6379> keys *
+(empty array)
+```
