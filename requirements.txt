@@ -14,6 +14,7 @@ dnspython==2.7.0
 email_validator==2.2.0
 executing==2.0.1
 fastapi==0.115.6
+fastapi-cache2==0.2.2
 fastapi-cli==0.0.7
 greenlet==3.1.1
 h11==0.14.0
@@ -39,6 +40,7 @@ orjson==3.10.13
 packaging==25.0
 parso==0.8.4
 passlib==1.7.4
+pendulum==3.1.0
 pexpect==4.9.0
 platformdirs==4.3.8
 prompt_toolkit==3.0.47
@@ -69,6 +71,7 @@ tornado==6.4.1
 traitlets==5.14.3
 typer==0.15.1
 typing_extensions==4.12.2
+tzdata==2025.2
 ujson==5.10.0
 uvicorn==0.34.0
 uvloop==0.21.0

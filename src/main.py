@@ -24,6 +24,10 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
+
+from fastapi_cache import FastAPICache
+from fastapi_cache.backends.redis import RedisBackend
+
 import sys
 from pathlib import Path
 
@@ -38,6 +42,7 @@ sys.path.append(str(Path(__file__).parent))
 async def lifespan(app: FastAPI):
     # При старте приложения
     await redis_manager.connect()
+    FastAPICache.init(RedisBackend(redis_manager.redis), prefix="fastapi-cache")
     yield
     await redis_manager.close()
     # При выключении/перезагрузке приложения
