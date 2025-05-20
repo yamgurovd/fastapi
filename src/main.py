@@ -18,6 +18,7 @@
 # if __name__ == "__main__":
 #     uvicorn.run("main:app", host="0.0.0.0",  reload=True)
 
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
@@ -26,11 +27,21 @@ import uvicorn
 import sys
 from pathlib import Path
 
+from src.init import redis_manager
+
 # Adjust the system path to include the parent directory
 sys.path.append(str(Path(__file__).parent))
 
+
 # Create FastAPI instance
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # При старте приложения
+    await redis_manager.connect()
+    yield
+    await redis_manager.close()
+    # При выключении/перезагрузке приложения
+
 
 # Include routers for different modules
 from api.auth import router as router_auth  # Adjusted import path
@@ -39,6 +50,7 @@ from src.api.rooms import router as router_rooms
 from src.api.bookings import router as router_bookings
 from src.api.facilities import router as router_facilities
 
+app = FastAPI(lifespan=lifespan)
 app.include_router(router_auth)
 app.include_router(router_hotels)
 app.include_router(router_rooms)
