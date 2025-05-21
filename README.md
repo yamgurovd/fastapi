@@ -154,15 +154,21 @@ alembic upgrade head
 sudo apt update
 sudo apt upgrade
 ```
+
 2. Установите Redis:
+
 ```shell
 sudo apt install redis-server
 ```
+
 3. Откройте конфигурационный файл:
+
 ```shell
 sudo nano /etc/redis/redis.conf
 ```
+
 4. Найдите секцию GENERAL (используйте поиск Ctrl+W и введите GENERAL) - Она выглядит примерно так:
+
 ```text
 ################################# GENERAL #####################################
 
@@ -178,7 +184,9 @@ daemonize yes
 
 pidfile /var/run/redis/redis-server.pid
 ```
+
 5. Добавьте строку supervised systemd после комментариев, но перед другими параметрами (например, pidfile):
+
 ```text
 ################################# GENERAL #####################################
 
@@ -206,12 +214,16 @@ daemonize yes
 # supervised auto
 supervised systemd ---- ВОТ ЗДЕСЬ НУЖНО ДОБАВИТЬ 
 ```
+
 6. После этого сохраните изменения с помощью комбинации клавиш Ctrl + O. Затем закройте файл сочетанием Ctrl + X.
 7. Перезапустите службу Redis:
+
 ```shell
 sudo systemctl restart redis.service
 ```
+
 ### Пример работы черз redis-cli
+
 ```redis
 d@d:~$ redis-cli
 127.0.0.1:6379> set a 14
@@ -219,9 +231,9 @@ OK
 127.0.0.1:6379> keys *
 1) "a"
 127.0.0.1:6379> values *
-(error) ERR unknown command 'values', with args beginning with: '*' 
+(error) ERR unknown command 'values', with args beginning with: '*'
 127.0.0.1:6379> value a
-(error) ERR unknown command 'value', with args beginning with: 'a' 
+(error) ERR unknown command 'value', with args beginning with: 'a'
 127.0.0.1:6379> get a
 "14"
 127.0.0.1:6379> del a
@@ -230,35 +242,52 @@ OK
 (empty array)
 ```
 
-
 ## Celery
+
 Для запуска Celery необходимо запустить команду
+
 ```shell
 celery --app=src.tasks.celery_app:celery_instance worker -l info
 ```
 
+Для запуска Celery и Celety beat необходимо запустить команду
+
+```shell
+celery --app=src.tasks.celery_app:celery_instance worker -l info -B
+```
+
 Полезные команды:
 Запуск воркера с указанием конкретных очередей:
+
 ```shell
 celery -A proj worker -l INFO -Q foo,bar,baz
 ```
+
 ### Управление воркерами и очередями
+
 Добавить потребителя (воркера) для очереди:
+
 ```shell
 celery -A proj control add_consumer foo
 ```
 
 ### Вызов задач из Python-кода
+
 Вызов задачи асинхронно с помощью delay():
+
 ```shell
 result = add.delay(4, 4)
 ```
+
 Параллельное выполнение группы задач (group):
+
 ```shell
 from celery import group
 group_result = group(add.s(2, 2), add.s(4, 4))()
 ```
+
 Просмотр справки по команде worker
+
 ```shell
 celery worker --help
 ```
