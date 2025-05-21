@@ -49,11 +49,13 @@ async def lifespan(app: FastAPI):
 
 
 # Include routers for different modules
+from src.init import redis_manager
 from api.auth import router as router_auth  # Adjusted import path
 from api.hotels import router as router_hotels  # Adjusted import path
 from src.api.rooms import router as router_rooms
 from src.api.bookings import router as router_bookings
 from src.api.facilities import router as router_facilities
+from src.api.images import router as router_images
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(router_auth)
@@ -61,6 +63,7 @@ app.include_router(router_hotels)
 app.include_router(router_rooms)
 app.include_router(router_facilities)
 app.include_router(router_bookings)
+app.include_router(router_images)
 
 # Configure CORS middleware
 app.add_middleware(
