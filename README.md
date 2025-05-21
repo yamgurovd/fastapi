@@ -229,3 +229,36 @@ OK
 127.0.0.1:6379> keys *
 (empty array)
 ```
+
+
+## Celery
+Для запуска Celery необходимо запустить команду
+```shell
+celery --app=src.tasks.celery_app:celery_instance worker -l info
+```
+
+Полезные команды:
+Запуск воркера с указанием конкретных очередей:
+```shell
+celery -A proj worker -l INFO -Q foo,bar,baz
+```
+### Управление воркерами и очередями
+Добавить потребителя (воркера) для очереди:
+```shell
+celery -A proj control add_consumer foo
+```
+
+### Вызов задач из Python-кода
+Вызов задачи асинхронно с помощью delay():
+```shell
+result = add.delay(4, 4)
+```
+Параллельное выполнение группы задач (group):
+```shell
+from celery import group
+group_result = group(add.s(2, 2), add.s(4, 4))()
+```
+Просмотр справки по команде worker
+```shell
+celery worker --help
+```
