@@ -291,3 +291,10 @@ group_result = group(add.s(2, 2), add.s(4, 4))()
 ```shell
 celery worker --help
 ```
+
+
+## Тестирование Pytest
+Запуск тестов 
+```shell
+pytest -v
+```
