@@ -1,175 +1,127 @@
-# fastapi
+# FastAPI: Система бронирования отелей
 
 ## Краткое описание
+```markdown
 
-Проект бронирование отелей c библиотекой fastapi изучение курса - https://artemshumeiko.zenclass.ru/public/products
 
-## 1 Настройка проекта
+Проект для бронирования отелей с использованием библиотеки FastAPI. Разработан в рамках обучающего курса:  
+[https://artemshumeiko.zenclass.ru/public/products](https://artemshumeiko.zenclass.ru/public/products)
 
-1. Создать и активировать виртуальное окружение
+![Логотип FastAPI](https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png)
 
-```angular2html
+```
+
+---
+
+## 1. Настройка проекта
+
+### 1.1 Создание виртуального окружения
+
+```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-2. Установить библиотеку fastapi
+### 1.2 Установка FastAPI
 
-```angular2html
+```bash
 pip install fastapi[all]
 ```
 
-3. Зафиксировать все библиотеки requirements.txt
+### 1.3 Сохранение зависимостей
 
-```angular2html
+```bash
 python -m pip freeze > requirements.txt
 ```
 
-## 2 Команды для запуска проекта на локальном компьютере
+---
 
-1. Запуск проекта на локальном компьютере тремя способами
+## 2. Запуск проекта
 
-#### 1 способ, флаг --reload не обязательный
+Доступные способы запуска на локальной машине:
 
-```angular2html
+#### Способ 1 (с авто-перезагрузкой)
+
+```bash
 uvicorn main:app --reload
 ```
 
-#### 2 способ
+#### Способ 2
 
-```angular2html
+```bash
 fastapi dev main.py
 ```
 
-#### 3 способ если на
+#### Способ 3
 
-```angular2html
+```bash
 python main.py
 ```
 
-#### Remark: Данный вид запуска применяется при разворачивании проекта на сервере
+*Примечание:* Для продакшн-окружения рекомендуется использовать первый способ без `--reload`
 
-## 3 Установка PostgreSQL
+![Пример запуска сервера](course_helpers/3%20База%20данных%20и%20паттерны/BD5.png)
 
-Инструкция взята -  https://firstvds.ru/technology/ustanovka-postgresql-na-ubuntu
+---
 
-### в консоли:
+## 3. Установка PostgreSQL
 
-- 1
+### 3.1 Установка и настройка
 
-```shell
+```bash
 sudo apt update
-```
-
-- 2
-
-```shell
 sudo apt install postgresql
-```
-
-- 3
-
-```shell
 sudo systemctl start postgresql.service
 ```
 
-#### Remark  если установлен постгрес начать с этого шага
+### 3.2 Работа с PostgreSQL
 
-- 4
-
-```shell
+```bash
 sudo -i -u postgres
-```
-
-- 5
-
-```sql
 psql
 ```
 
-- 6
+### 3.3 Создание базы данных
 
 ```sql
-create database testdb;
+CREATE
+DATABASE hotel_db;
 ```
 
-#### Remark  не забудь кавычки
+### Полезные команды:
 
-### Полезные команды для SQL
+| Команда     | Описание         |
+|-------------|------------------|
+| `\l`        | Список БД        |
+| `\c dbname` | Подключение к БД |
+| `\dt`       | Список таблиц    |
 
-- в psql команды надо заканчивать символом ;
-- \l вводишь в psql, это список бд
-- при успешном создании бд будет ответ CREATE DATABASE
-- q - для выхода после команды
+![Работа с PostgreSQL](course_helpers/3%20База%20данных%20и%20паттерны/BD5.png)
 
-### Пример установки PostgreSQL
+---
 
-!["PostgreSQL"](/course_helpers/3%20База%20данных%20и%20паттерны/BD5.png)
+## 4. Настройка Redis
 
-## Взаимодействие БД с помощью sqlalchemy и alembic
+### 4.1 Установка
 
-### Установка
-
-1. Установка библиотек для запросов к БД
-
-```shell
-pip install sqlalchemy alembic
-```
-
-2Установка библиотек для запросов к БД
-
-```shell
-pip install sqlalchemy alembic
-```
-
-### Миграции
-
-1. Инициализация и настройка директорий для миграций
-
-```shell
-alembic init src/migrations
-```
-
-2. Подготовка миграции для создания таблиц и выполнение обновлений
-
-```shell
-alembic revision --autogenerate -m "initial_migration"
-```
-
-3. Создание таблицы в БД
-
-```shell
-alembic upgrade head
-```
-
-### Пример выполнения миграции
-
-!["PostgreSQL"](/course_helpers/3%20База%20данных%20и%20паттерны/alembic_migrations_example1.png)
-
-## Установка Redis
-
-1. Обновите пакеты:
-
-```shell
+```bash
 sudo apt update
-sudo apt upgrade
-```
-
-2. Установите Redis:
-
-```shell
 sudo apt install redis-server
 ```
 
-3. Откройте конфигурационный файл:
+### 4.2 Конфигурация Redis
 
-```shell
+1. Откройте конфигурационный файл:
+
+```bash
 sudo nano /etc/redis/redis.conf
 ```
 
-4. Найдите секцию GENERAL (используйте поиск Ctrl+W и введите GENERAL) - Она выглядит примерно так:
+2. Найдите секцию GENERAL (Ctrl+W для поиска):
 
-```text
+Исходный вид секции:
+
+```ini
 ################################# GENERAL #####################################
 
 # By default Redis does not run as a daemon. Use 'yes' if you need it.
@@ -185,9 +137,9 @@ daemonize yes
 pidfile /var/run/redis/redis-server.pid
 ```
 
-5. Добавьте строку supervised systemd после комментариев, но перед другими параметрами (например, pidfile):
+3. Добавьте строку `supervised systemd` после комментариев:
 
-```text
+```ini
 ################################# GENERAL #####################################
 
 # By default Redis does not run as a daemon. Use 'yes' if you need it.
@@ -215,12 +167,25 @@ daemonize yes
 supervised systemd ---- ВОТ ЗДЕСЬ НУЖНО ДОБАВИТЬ 
 ```
 
-6. После этого сохраните изменения с помощью комбинации клавиш Ctrl + O. Затем закройте файл сочетанием Ctrl + X.
-7. Перезапустите службу Redis:
+4. Сохранение изменений:
 
-```shell
+- Нажмите `Ctrl+O` для сохранения
+- Нажмите `Enter` для подтверждения
+- Нажмите `Ctrl+X` для выхода
+
+5. Перезапустите Redis:
+
+```bash
 sudo systemctl restart redis.service
 ```
+
+### 4.3 Проверка работы
+
+```bash
+redis-cli ping
+```
+
+Ожидаемый ответ: `PONG`
 
 ### Пример работы черз redis-cli
 
@@ -242,59 +207,78 @@ OK
 (empty array)
 ```
 
-## Celery
+---
 
-Для запуска Celery необходимо запустить команду
+## 5. Миграции с Alembic
 
-```shell
+### 5.1 Установка
+
+```bash
+pip install sqlalchemy alembic
+```
+
+### 5.2 Инициализация
+
+```bash
+alembic init migrations
+```
+
+### 5.3 Создание и применение миграции
+
+```bash
+alembic revision --autogenerate -m "init"
+alembic upgrade head
+```
+
+![Пример миграций](course_helpers/3%20База%20данных%20и%20паттерны/alembic_migrations_example1.png)
+
+---
+
+## 6. Интеграция Celery
+
+### 6.1 Запуск воркера
+
+```bash
 celery --app=src.tasks.celery_app:celery_instance worker -l info
 ```
 
-Для запуска Celery и Celety beat необходимо запустить команду
+### 6.2 Запуск с Beat
 
-```shell
+```bash
 celery --app=src.tasks.celery_app:celery_instance worker -l info -B
 ```
 
-Полезные команды:
-Запуск воркера с указанием конкретных очередей:
+### Пример задач:
 
-```shell
-celery -A proj worker -l INFO -Q foo,bar,baz
+```python
+@app.task
+def send_confirmation_email(booking_id):
+# Логика отправки email
 ```
 
-### Управление воркерами и очередями
+---
 
-Добавить потребителя (воркера) для очереди:
+## 7. Тестирование
 
-```shell
-celery -A proj control add_consumer foo
-```
+### Запуск тестов
 
-### Вызов задач из Python-кода
-
-Вызов задачи асинхронно с помощью delay():
-
-```shell
-result = add.delay(4, 4)
-```
-
-Параллельное выполнение группы задач (group):
-
-```shell
-from celery import group
-group_result = group(add.s(2, 2), add.s(4, 4))()
-```
-
-Просмотр справки по команде worker
-
-```shell
-celery worker --help
-```
-
-
-## Тестирование Pytest
-Запуск тестов 
-```shell
+```bash
 pytest -v
 ```
+
+### Покрытие кода
+
+```bash
+pytest --cov=app tests/
+```
+
+![Пример тестирования](course_helpers/tests/test_example.png)
+
+---
+
+## Контакты
+
+По вопросам сотрудничества:  
+[example@email.com](mailto:example@email.com)
+
+![Финал архитектуры](course_helpers/architecture_final.png)
