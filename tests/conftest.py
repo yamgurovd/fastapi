@@ -78,6 +78,7 @@ async def setup_database(check_test_mode):
         await db_.rooms.add_bulk(rooms)
         await db_.commit()
 
+
 @pytest.fixture(scope="session")
 async def ac() -> AsyncClient:
     transport = ASGITransport(app=app)
@@ -97,3 +98,16 @@ async def register_user(setup_database):
             }
         )
         assert response.status_code == 200 or response.status_code == 201, f"Registration failed: {response.text}"
+
+
+@pytest.fixture(scope="session")
+async def authenticated_ac(register_user, ac):
+    await ac.post(
+        "/auth/login",
+        json={
+            "email": "kot@pes.com",
+            "password": "1234"
+        }
+    )
+    assert ac.cookies["access_token"]
+    yield ac
