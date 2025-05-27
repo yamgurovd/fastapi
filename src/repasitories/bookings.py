@@ -8,7 +8,6 @@ from src.repasitories.base import BaseRepository
 from src.repasitories.mappers.mappers import BookingDataMapper
 from src.repasitories.utils import rooms_ids_for_booking
 from src.schemas.bookings import BookingAdd
-from src.schemas.bookings import Booking
 
 
 class BookingsRepository(BaseRepository):

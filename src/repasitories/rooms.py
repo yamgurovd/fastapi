@@ -11,7 +11,6 @@ from src.repasitories.utils import rooms_ids_for_booking
 from src.repasitories.base import BaseRepository
 from src.models.rooms import RoomsOrm
 from src.repasitories.mappers.mappers import RoomDataMapper, RoomDataWithRelsMapper
-from src.schemas.rooms import Room, RoomWithRels
 
 
 class RoomsRepository(BaseRepository):

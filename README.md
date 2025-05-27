@@ -282,3 +282,9 @@ pytest --cov=app tests/
 [example@email.com](mailto:example@email.com)
 
 ![Финал архитектуры](course_helpers/architecture_final.png)
+
+## 5. Линтер и форматтер Ruff
+### запуск проверки линтеров 
+```shell
+Линтер и форматтер Ruff
+```

@@ -10,7 +10,7 @@
 #     title: str | None = Field(None)
 #     location: str | None = Field(None)
 
-from pydantic import BaseModel, Field, ConfigDict
+from pydantic import BaseModel
 
 
 class HotelAdd(BaseModel):
