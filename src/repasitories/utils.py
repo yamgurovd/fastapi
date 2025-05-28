@@ -1,5 +1,5 @@
 from datetime import date
-from sqlalchemy import select, func
+from sqlalchemy import select, func, Select, Subquery
 from src.models.bookings import BookingsOrm
 from src.models.rooms import RoomsOrm
 
@@ -8,7 +8,7 @@ def rooms_ids_for_booking(
     date_from: date,
     date_to: date,
     hotel_id: int | None = None,
-):
+) -> Select:
     rooms_count = (
         select(BookingsOrm.room_id, func.count("*").label("rooms_booked"))
         .select_from(BookingsOrm)

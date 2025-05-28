@@ -1,6 +1,7 @@
 # FastAPI: Система бронирования отелей
 
 ## Краткое описание
+
 ```markdown
 
 
@@ -85,7 +86,7 @@ psql
 
 ```sql
 CREATE
-DATABASE hotel_db;
+    DATABASE hotel_db;
 ```
 
 ### Полезные команды:
@@ -272,7 +273,44 @@ pytest -v
 pytest --cov=app tests/
 ```
 
-![Пример тестирования](course_helpers/tests/test_example.png)
+## 5. Линтер и форматтер Ruff
+
+### запуск проверки линтеров
+
+```shell
+ruff check
+```
+
+### Форматирование кода - отформатирует все директироии
+
+```shell
+ruff format
+```
+
+### Форматирование конкретной директории
+
+```shell
+ruff format src
+```
+
+## Статический типизатор Pyright
+
+### Установка на linux
+
+```shell
+sudo npn install -g pyright
+```
+
+### Проверка работы на типизацию
+
+```shell
+pyright
+```
+
+### Пример использования
+
+!["Dbeaver"](/course_helpers/7%20Тестирование/pyright.png)
+
 
 ---
 
@@ -282,18 +320,3 @@ pytest --cov=app tests/
 [example@email.com](mailto:example@email.com)
 
 ![Финал архитектуры](course_helpers/architecture_final.png)
-
-## 5. Линтер и форматтер Ruff
-### запуск проверки линтеров 
-```shell
-ruff check
-```
-
-### Форматирование кода - отформатирует все директироии 
-```shell
-ruff format
-```
-### Форматирование конкретной директории
-```shell
-ruff format src
-```

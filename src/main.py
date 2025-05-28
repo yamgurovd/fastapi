@@ -135,7 +135,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 async def lifespan(app: FastAPI):
     # Инициализация при старте
     await redis_manager.connect()
-    FastAPICache.init(RedisBackend(redis_manager.redis), prefix="fastapi-cache")
+    FastAPICache.init(RedisBackend(redis_manager._redis), prefix="fastapi-cache")
 
     # Фоновая задача с обработкой отмены
     task = asyncio.create_task(run_send_email_regularly())
