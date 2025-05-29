@@ -3,9 +3,8 @@ from datetime import date
 from fastapi import Query, APIRouter, Body
 from fastapi_cache.decorator import cache
 
-
 from src.api.dependencies import PaginationDep, DBDep
-
+from src.exceptions import check_date_to_after_date_from, ObjectNotFoundException, HotelNotFoundHTTPException
 
 from src.schemas.hotels import HotelPatch, HotelAdd
 
@@ -32,13 +31,14 @@ router = APIRouter(prefix="/hotels", tags=["Отели"])
 @router.get("")
 @cache(expire=10)  # Здесь был код закоментирован
 async def get_hotels(
-    pagination: PaginationDep,
-    db: DBDep,
-    location: str | None = Query(None, description="Локация"),
-    title: str | None = Query(None, description="Название отеля"),
-    date_from: date = Query(example="2024-08-01"),
-    date_to: date = Query(example="2024-08-10"),
+        pagination: PaginationDep,
+        db: DBDep,
+        location: str | None = Query(None, description="Локация"),
+        title: str | None = Query(None, description="Название отеля"),
+        date_from: date = Query(example="2024-08-01"),
+        date_to: date = Query(example="2024-08-10"),
 ):
+    check_date_to_after_date_from(date_from, date_to)
     per_page = pagination.per_page or 5
     # return await db.hotels.get_all(
     #     location=location,
@@ -59,31 +59,34 @@ async def get_hotels(
 
 @router.get("/{hotel_id}")
 async def get_hotel(hotel_id: int, db: DBDep):
-    return await db.hotels.get_one_or_none(id=hotel_id)
+    try:
+        return await db.hotels.get_one(id=hotel_id)
+    except ObjectNotFoundException:
+        raise HotelNotFoundHTTPException
 
 
 @router.post("")
 @router.post("")
 async def create_hotel(
-    db: DBDep,
-    hotel_data: HotelAdd = Body(
-        openapi_examples={
-            "1": {
-                "summary": "Сочи",
-                "value": {
-                    "title": "Отель Сочи 5 звезд у моря",
-                    "location": "ул. Моря, 1",
+        db: DBDep,
+        hotel_data: HotelAdd = Body(
+            openapi_examples={
+                "1": {
+                    "summary": "Сочи",
+                    "value": {
+                        "title": "Отель Сочи 5 звезд у моря",
+                        "location": "ул. Моря, 1",
+                    },
                 },
-            },
-            "2": {
-                "summary": "Дубай",
-                "value": {
-                    "title": "Отель Дубай У фонтана",
-                    "location": "ул. Шейха, 2",
+                "2": {
+                    "summary": "Дубай",
+                    "value": {
+                        "title": "Отель Дубай У фонтана",
+                        "location": "ул. Шейха, 2",
+                    },
                 },
-            },
-        }
-    ),
+            }
+        ),
 ):
     hotel = await db.hotels.add(hotel_data)
     await db.commit()
@@ -104,9 +107,9 @@ async def edit_hotel(hotel_id: int, hotel_data: HotelAdd, db: DBDep):
     description="<h1>Тут мы частично обновляем данные об отеле: можно отправить name, а можно title</h1>",
 )
 async def partially_edit_hotel(
-    hotel_id: int,
-    hotel_data: HotelPatch,
-    db: DBDep,
+        hotel_id: int,
+        hotel_data: HotelPatch,
+        db: DBDep,
 ):
     await db.hotels.edit(hotel_data, exclude_unset=True, id=hotel_id)
     await db.commit()
