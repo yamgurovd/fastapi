@@ -5,7 +5,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.database import Base
 from sqlalchemy import select, insert, update, delete
+from sqlalchemy.exc import NoResultFound
 
+from src.exceptions import ObjectNotFoundException
 from src.repasitories.mappers.base import DataMapper
 
 
@@ -38,6 +40,15 @@ class BaseRepository:
         model = result.scalars().one_or_none()
         if model is None:
             return None
+        return self.mapper.map_to_domain_entity(model)
+
+    async def get_one(self, **filter_by) -> BaseModel:
+        query = select(self.model).filter_by(**filter_by)
+        result = await self.session.execute(query)
+        try:
+            model = result.scalar_one()
+        except NoResultFound:
+            raise ObjectNotFoundException
         return self.mapper.map_to_domain_entity(model)
 
     async def add(self, data: BaseModel) -> BaseModel | Any:
