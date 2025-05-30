@@ -2,6 +2,7 @@ from datetime import datetime, timezone, timedelta
 from passlib.context import CryptContext
 import jwt
 from src.config import settings
+from src.services.base import BaseService
 from fastapi import HTTPException
 
 
