@@ -463,4 +463,89 @@ docker run -p 8888:8000 booking_image_1
 ```
 
 ![Dbeaver](/course_helpers/9%20Docker%20и%20деплой%20проекта/docker_2.png)
+
+
 ----
+
+## Запуск Swagger-документации на двух машинах
+
+### Проверка IP-адресов на обоих компьютерах
+
+На каждом из компьютеров выполните команду:
+
+```shell
+ip a
+```
+
+### Пример вывода на компьютере с сервером
+
+```shell
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: enp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether d8:43:ae:52:20:58 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.0.102/24 brd 192.168.0.255 scope global dynamic noprefixroute enp3s0
+       valid_lft 4064sec preferred_lft 4064sec
+3: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 56:fb:3c:26:2a:38 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::54fb:3cff:fe26:2a38/64 scope link 
+       valid_lft forever preferred_lft forever
+```
+
+### Пример вывода на ноутбуке
+
+```shell
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: enp14s0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN group default qlen 1000
+    link/ether e8:40:f2:9f:a9:29 brd ff:ff:ff:ff:ff:ff
+3: wlp13s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 44:6d:57:1c:e0:30 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.0.100/24 brd 192.168.0.255 scope global dynamic noprefixroute wlp13s0
+       valid_lft 6927sec preferred_lft 6927sec
+    inet6 fe80::fe60:c9e3:5e74:b492/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+```
+
+### Проверка сетевого соединения
+
+#### IP компьютера с сервером: 192.168.0.102/24
+
+#### IP ноутбука: 192.168.0.100/24
+
+#### Оба устройства находятся в одной подсети 192.168.0.0/24, значит они должны видеть друг друга.
+
+#### Проверьте с ноутбука доступность компьютера с сервером командой:
+
+```shell
+ping 192.168.0.102
+```
+
+#### Пример успешного ответа:
+
+```shell
+PING 192.168.0.102 (192.168.0.102) 56(84) bytes of data.
+64 bytes from 192.168.0.102: icmp_seq=1 ttl=64 time=4.21 ms
+64 bytes from 192.168.0.102: icmp_seq=2 ttl=64 time=1.56 ms
+64 bytes from 192.168.0.102: icmp_seq=3 ttl=64 time=13.5 ms
+```
+
+...
+
+### Открытие Swagger-документации в браузере
+
+#### На ноутбуке откройте в браузере следующий адрес:
+
+```text
+http://192.168.0.102:8000/docs#
+```
