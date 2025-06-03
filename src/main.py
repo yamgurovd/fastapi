@@ -132,7 +132,7 @@ from src.init import redis_manager
 # Корректировка путей
 sys.path.append(str(Path(__file__).parent.parent))
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 
 @asynccontextmanager

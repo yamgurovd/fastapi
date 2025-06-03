@@ -432,5 +432,35 @@ http://localhost:18123
 
 !["Dbeaver"](/course_helpers/9%20Docker%20и%20деплой%20проекта/redis_docker_2.png)
 
+## Запуск проекта с Dockerfile
 
+### 1. Сборка образа
 
+```shell
+docker build -t booking_image_1 .
+```
+
+### 2. Просмотр списка образов
+
+```shell
+docker images
+```
+
+### 3. Запуск контейнера из образа
+
+```shell
+docker run booking_image_1
+```
+
+### Пример
+
+![Dbeaver](/course_helpers/9%20Docker%20и%20деплой%20проекта/docker_1.png)
+
+### 4. Запуск контейнера с пробросом портов
+
+```shell
+docker run -p 8888:8000 booking_image_1
+```
+
+![Dbeaver](/course_helpers/9%20Docker%20и%20деплой%20проекта/docker_2.png)
+----
