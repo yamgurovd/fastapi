@@ -1,29 +1,5 @@
 # Интеграция Celery
 
---- 
-
-### 1 Запуск воркера
-
-```bash
-celery --app=src.tasks.celery_app:celery_instance worker -l info
-```
-
-### 6.2 Запуск с Beat
-
-```bash
-celery --app=src.tasks.celery_app:celery_instance worker -l info -B
-```
-
-### Пример задач:
-
-```python
-@app.task
-def send_confirmation_email(booking_id):
-# Логика отправки email
-```
-
-![Пример миграций](/course_helpers/6%20Кэширование%20с%20Redis/celery.png)
-
 ---
 
 ## Краткое содержание инструкции
@@ -47,5 +23,52 @@ def send_confirmation_email(booking_id):
 ### Что происходит в целом
 
 Таким образом, инструкция показывает базовую настройку и запуск Celery для асинхронной и периодической обработки задач.
+
+### Таблица команд из инструкции по интеграции Celery
+
+| Команда                                                               | Описание                                                                                                                                               |
+|-----------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `celery --app=src.tasks.celery_app:celery_instance worker -l info`    | Запуск Celery worker, который выполняет задачи из приложения `src.tasks.celery_app` с именем экземпляра `celery_instance`. Логирование на уровне info. |
+| `celery --app=src.tasks.celery_app:celery_instance worker -l info -B` | Запуск Celery worker вместе с Beat — планировщиком периодических задач, позволяющим выполнять задачи по расписанию. Логирование на уровне info.        |
+
+---
+
+#### Пояснения к командам и примерам
+
+- **worker** — запускает процесс, который будет выполнять задачи Celery.
+- **--app=src.tasks.celery_app:celery_instance** — указывает модуль и объект Celery, из которого брать задачи.
+- **-l info** — уровень логирования, здесь — информационный.
+- **-B** — запускает Beat вместе с worker, чтобы обрабатывать периодические задачи.
+- **@app.task** — декоратор для определения функции как задачи Celery.
+
+# Подробная инструкция
+
+---
+
+## Пример задачи Celery
+
+### 1 Запуск воркера
+
+```bash
+celery --app=src.tasks.celery_app:celery_instance worker -l info
+```
+
+### 6.2 Запуск с Beat
+
+```bash
+celery --app=src.tasks.celery_app:celery_instance worker -l info -B
+```
+
+### Пример задач:
+
+```python
+@app.task
+def send_confirmation_email(booking_id):
+# Логика отправки email
+```
+
+![Пример миграций](/course_helpers/6%20Кэширование%20с%20Redis/celery.png)
+
+
 
 ---

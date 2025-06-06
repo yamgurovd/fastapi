@@ -15,7 +15,7 @@
 - [3. Миграции с Alembic](/course_helpers/3%20База%20данных%20и%20паттерны/Alembic.md)
 - [4. Интеграция Celery](/course_helpers/6%20Кэширование%20с%20Redis/Celery.md)
 - [5. Тестирование](/course_helpers/7%20Тестирование/Testing.md)
-- [6. Установка и настройка Redis](/course_helpers/9%20Docker%20и%20деплой%20проекта/Redis.md)
+- [6. Установка и настройка Redis](/course_helpers/6%20Кэширование%20с%20Redis/Redis.md)
 - [7. Работа с Docker](/course_helpers/9%20Docker%20и%20деплой%20проекта/Docker.md)
 - [8. Запуск Swagger-документации - сервер клиент по локальной сети](/course_helpers/9%20Docker%20и%20деплой%20проекта/Localhost.md)
 
