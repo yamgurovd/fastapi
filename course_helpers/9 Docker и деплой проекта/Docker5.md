@@ -166,5 +166,4 @@ docker build -t booking_image .
 ![Dbeaver](/course_helpers/9%20Docker%20и%20деплой%20проекта/docker_back.png)
 
 
-
 ----
