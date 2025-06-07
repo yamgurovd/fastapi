@@ -11,7 +11,7 @@
 3. [Запуск проекта с Dockerfile](/course_helpers/9%20Docker%20и%20деплой%20проекта/Dockerfile.md)
 4. [Инструкция для запуска Docker с БД, Redis и Backend](/course_helpers/9%20Docker%20и%20деплой%20проекта/Docker5.md)
 5. [Docker Compose](/course_helpers/9%20Docker%20и%20деплой%20проекта/Compose.md)
-
+5. [Nginx](/course_helpers/9%20Docker%20и%20деплой%20проекта/NGINX.md)
 ---
 
 ### Docker: Основные команды
