@@ -33,3 +33,5 @@ services:
 networks:
   myNetwork:
     external: true
+
+# Вот здесь
