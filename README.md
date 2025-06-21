@@ -23,7 +23,7 @@
 
 - [8. Запуск Swagger-документации и сервера для локальной сети](/course_helpers/9%20Docker%20и%20деплой%20проекта/Localhost.md)
 - [9. Подключение по SSH с компьютера к ноутбуку по локальной сети](/course_helpers/9%20Docker%20и%20деплой%20проекта/ssh.md)
-- [10. Установка и базовая настройка Kubernetes с помощью MicroK8s на Ubuntu](/course_helpers/9%20Docker%20и%20деплой%20проекта/ssh.md)
+- [10. Установка и базовая настройка Kubernetes с помощью MicroK8s на Ubuntu](/course_helpers/9%20Docker%20и%20деплой%20проекта/cuber.md)
 
 ---
 
