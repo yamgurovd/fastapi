@@ -122,14 +122,14 @@ microk8s dashboard-proxy
 
 ### 5. Откройте Kubernetes Dashboard в браузере
 
-![Dbeaver](/course_helpers/9%20Docker%20и%20деплой%20проекта/cuber33.png)
-![Dbeaver](/course_helpers/9%20Docker%20и%20деплой%20проекта/cuber34.png)
 На компьютере, где настроен туннель, откройте браузер и перейдите по адресу:
 
 ```shell
 https://localhost:10443
 ```
 
+![Dbeaver](/course_helpers/9%20Docker%20и%20деплой%20проекта/cuber33.png)
+![Dbeaver](/course_helpers/9%20Docker%20и%20деплой%20проекта/cuber34.png)
 При необходимости подтвердите исключение безопасности (Dashboard использует самоподписанный сертификат).
 
 ---
