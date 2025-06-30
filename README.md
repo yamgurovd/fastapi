@@ -25,6 +25,7 @@
 - [9. Подключение по SSH с компьютера к ноутбуку по локальной сети](/course_helpers/9%20Docker%20и%20деплой%20проекта/ssh.md)
 - [10. Установка и базовая настройка Kubernetes с помощью MicroK8s на Ubuntu](/course_helpers/9%20Docker%20и%20деплой%20проекта/cuber.md)
 - [11. Настройка туннелирования через SSH с помощью MobaXterm для доступа к Kubernetes Dashboard](/course_helpers/9%20Docker%20и%20деплой%20проекта/cuber2.md)
+- [12 Инструкция по запуску FastAPI и Celery с помощью bash-скрипта](/course_helpers/9%20Docker%20и%20деплой%20проекта/app.md)
 
 ---
 
